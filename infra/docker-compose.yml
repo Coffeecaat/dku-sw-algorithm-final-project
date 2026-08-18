@@ -1,0 +1,32 @@
+services:
+  postgres:
+    image: postgis/postgis:16-3.4
+    container_name: dku-algorithm-postgres
+    environment:
+      POSTGRES_DB: cafe_map_lab
+      POSTGRES_USER: cafe_lab
+      POSTGRES_PASSWORD: cafe_lab
+    ports:
+      - "55432:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+
+  mysql:
+    image: mysql:8.4
+    container_name: dku-algorithm-mysql
+    environment:
+      MYSQL_DATABASE: cafe_map_lab
+      MYSQL_USER: cafe_lab
+      MYSQL_PASSWORD: cafe_lab
+      MYSQL_ROOT_PASSWORD: cafe_lab_root
+    command:
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_unicode_ci
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+
+volumes:
+  postgres-data:
+  mysql-data:
